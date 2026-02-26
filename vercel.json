@@ -6,6 +6,9 @@
       "maxDuration": 10
     }
   },
+  "rewrites": [
+    { "source": "/human", "destination": "/human.html" }
+  ],
   "env": {
     "STRIPE_SECRET_KEY": "@stripe-secret-key",
     "NEXT_PUBLIC_URL": "@site-url"
