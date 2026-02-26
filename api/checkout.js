@@ -1,9 +1,9 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 const PRICE_IDS = {
-  guide1:  process.env.STRIPE_PRICE_GUIDE1  || process.env.STRIPE_PRICE_ID, // Claude Code & Vibe Coding — $29
-  guide2:  process.env.STRIPE_PRICE_GUIDE2  || process.env.STRIPE_PRICE_ID, // OpenClaw Blueprint — $29
-  bundle:  process.env.STRIPE_PRICE_BUNDLE  || process.env.STRIPE_PRICE_ID, // Full Stack Bundle — $45
+  guide1: process.env.CLAUDE_CODE,  // Claude Code & Vibe Coding — $29
+  guide2: process.env.OPENCLAW,     // OpenClaw Blueprint — $29
+  bundle: process.env.BUNDLE,       // Full Stack Bundle — $44
 };
 
 module.exports = async (req, res) => {
