@@ -86,5 +86,20 @@
       <strong>24/7 support included.</strong> Email hello@theagenticblueprint.com with any question, any time. Average response: under 1 hour.
     </div>
   </div>
+<script>
+  (async () => {
+    const params = new URLSearchParams(window.location.search);
+    const session_id = params.get('session_id');
+    const product = params.get('product') || 'bundle';
+    if (!session_id) return;
+    try {
+      await fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ session_id, product })
+      });
+    } catch(e) { console.error('Email trigger failed:', e); }
+  })();
+</script>
 </body>
 </html>
