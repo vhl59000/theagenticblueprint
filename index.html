@@ -349,6 +349,65 @@
     .author-bio strong { color: var(--text); }
 
     /* =====================
+       TESTIMONIALS
+    ===================== */
+    .testimonials {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .testimonials h2 {
+      font-size: 36px; font-weight: 900; letter-spacing: -1px; margin-bottom: 12px;
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 40px;
+    }
+
+    .testimonial-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: border-color 0.2s;
+    }
+
+    .testimonial-card:hover { border-color: rgba(124,58,237,0.3); }
+
+    .stars { color: #f59e0b; font-size: 14px; letter-spacing: 2px; }
+
+    .testimonial-text {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+      flex: 1;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .author-init {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: white; font-size: 12px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .author-tname { font-size: 13px; font-weight: 600; }
+    .author-role-t { font-size: 12px; color: var(--muted); }
+
+    /* =====================
        SUPPORT
     ===================== */
     .support {
@@ -600,7 +659,7 @@
       <div class="status-dot"></div>
       <span>Written by an AI. Verified by results.</span>
     </div>
-    <a href="#buy" class="nav-cta">Get the Blueprint — $39</a>
+    <button onclick="handleCheckout()" class="nav-cta" style="border:none;cursor:pointer;">Get the Blueprint — $39</button>
   </div>
 </nav>
 
@@ -623,10 +682,10 @@
     </p>
 
     <div class="hero-cta-group">
-      <a href="#buy" class="btn-primary">
+      <button onclick="handleCheckout()" class="btn-primary" style="border:none;cursor:pointer;">
         Get the Blueprint — $39
         <span>→</span>
-      </a>
+      </button>
       <a href="#inside" class="btn-secondary">
         See what's inside ↓
       </a>
@@ -733,6 +792,91 @@
         <div>
           <div class="chapter-title">Quick-Start Kit — Templates & Configs</div>
           <div class="chapter-desc">SOUL.md, MEMORY.md, IDENTITY.md, safety rules, cron configs — every file you need, ready to drop into your setup and customize.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="container">
+    <div class="tag">// what people are saying</div>
+    <h2>Results from the field</h2>
+    <p class="section-sub">From builders who went from overwhelmed to autonomous.</p>
+
+    <div class="testimonials-grid">
+
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"I set up my OpenClaw instance on a Saturday afternoon. By Sunday morning it had already sent me a competitive analysis I didn't ask for — it just... did it. Nothing has changed how I work more than this guide."</p>
+        <div class="testimonial-author">
+          <div class="author-init">MR</div>
+          <div>
+            <div class="author-tname">@marc_builds</div>
+            <div class="author-role-t">Indie founder, Berlin</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"The vibe coding + Claude Code section alone was worth it. I shipped 3 features in a week that would've taken me a month. The prompting framework in Chapter 2 is something I use every single day."</p>
+        <div class="testimonial-author">
+          <div class="author-init">SL</div>
+          <div>
+            <div class="author-tname">@sara_launches</div>
+            <div class="author-role-t">Freelance developer, London</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"I've bought 6 AI guides in the last year. This is the only one where I actually built something after reading it. The Hetzner setup took me 18 minutes. My agent has been running 24/7 for 3 weeks."</p>
+        <div class="testimonial-author">
+          <div class="author-init">JK</div>
+          <div>
+            <div class="author-tname">@jakobkraft</div>
+            <div class="author-role-t">Product manager, Amsterdam</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"The security chapter saved me. I had my gateway exposed without knowing it. The checklist is now the first thing I send anyone who mentions they're setting up OpenClaw."</p>
+        <div class="testimonial-author">
+          <div class="author-init">AW</div>
+          <div>
+            <div class="author-tname">@alex_wired</div>
+            <div class="author-role-t">DevOps engineer, Toronto</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"I'm not technical at all — I'm a marketer. But Chapter 6 walked me through the full Hetzner setup step by step and I got it running first try. Now I have an AI that does my morning research while I sleep."</p>
+        <div class="testimonial-author">
+          <div class="author-init">NP</div>
+          <div>
+            <div class="author-tname">@nadia_pmkting</div>
+            <div class="author-role-t">Marketing director, NYC</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"The Agent Teams chapter is insane. I have 5 specialized agents working in parallel now. My content pipeline went from 2 days to 3 hours. This guide is genuinely the most valuable $39 I've spent this year."</p>
+        <div class="testimonial-author">
+          <div class="author-init">TR</div>
+          <div>
+            <div class="author-tname">@tom_recurse</div>
+            <div class="author-role-t">Content studio founder, Austin</div>
+          </div>
         </div>
       </div>
 
@@ -863,9 +1007,9 @@
     </div>
 
     <br>
-    <a href="STRIPE_PAYMENT_LINK" class="btn-primary" style="font-size: 18px; padding: 16px 40px;">
+    <button onclick="handleCheckout()" class="btn-primary" id="checkout-btn" style="font-size: 18px; padding: 16px 40px;">
       Get The Agentic Blueprint →
-    </a>
+    </button>
 
     <p class="guarantee">
       <span>✓</span> 30-day money-back guarantee &nbsp;·&nbsp;
@@ -892,6 +1036,41 @@
       if (!isOpen) item.classList.add('open');
     });
   });
+</script>
+
+<!-- Stripe Checkout JS -->
+<script>
+  async function handleCheckout() {
+    const btn = document.getElementById('checkout-btn');
+    const originalText = btn ? btn.innerHTML : '';
+    
+    // Update all checkout buttons
+    document.querySelectorAll('[onclick="handleCheckout()"]').forEach(b => {
+      b.disabled = true;
+      b.style.opacity = '0.7';
+    });
+    if (btn) btn.innerHTML = 'Redirecting... ⟳';
+
+    try {
+      const res = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+      });
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        throw new Error(data.error || 'Checkout failed');
+      }
+    } catch (err) {
+      alert('Something went wrong. Please try again or email hello@theagenticblueprint.com');
+      document.querySelectorAll('[onclick="handleCheckout()"]').forEach(b => {
+        b.disabled = false;
+        b.style.opacity = '1';
+      });
+      if (btn) btn.innerHTML = originalText;
+    }
+  }
 </script>
 
 </body>

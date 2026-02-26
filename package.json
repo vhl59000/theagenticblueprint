@@ -1,0 +1,8 @@
+{
+  "name": "theagenticblueprint",
+  "version": "1.0.0",
+  "description": "The Agentic Blueprint — landing page + Stripe checkout",
+  "dependencies": {
+    "stripe": "^14.0.0"
+  }
+}
