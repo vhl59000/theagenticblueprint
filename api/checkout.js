@@ -7,12 +7,23 @@ const PRICE_IDS = {
 };
 
 module.exports = async (req, res) => {
+  // Debug: log env vars (first 10 chars only for security)
+  console.log('Env check:', {
+    hasStripeKey: !!process.env.STRIPE_SECRET_KEY,
+    stripeKeyPrefix: process.env.STRIPE_SECRET_KEY?.substring(0, 7),
+    hasCLAUDE_CODE: !!process.env.CLAUDE_CODE,
+    hasOPENCLAW: !!process.env.OPENCLAW,
+    hasBUNDLE: !!process.env.BUNDLE,
+  });
+
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
   const { product = 'bundle' } = req.body || {};
   const priceId = PRICE_IDS[product] || PRICE_IDS.bundle;
+
+  console.log('Checkout request:', { product, priceId });
 
   if (!priceId) {
     return res.status(500).json({ error: 'Price not configured for: ' + product });
