@@ -113,11 +113,22 @@ module.exports = async (req, res) => {
 };
 
 // Parse raw body for Stripe signature verification
+// Handles both Vercel auto-parsed and raw stream cases
 function getRawBody(req) {
+  // If Vercel already parsed the body, re-serialize it
+  if (req.body) {
+    const raw = Buffer.isBuffer(req.body)
+      ? req.body
+      : typeof req.body === 'string'
+        ? req.body
+        : JSON.stringify(req.body);
+    return Promise.resolve(raw);
+  }
+  // Otherwise read raw from stream
   return new Promise((resolve, reject) => {
-    let data = '';
-    req.on('data', chunk => { data += chunk; });
-    req.on('end', () => resolve(data));
+    let chunks = [];
+    req.on('data', chunk => chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk)));
+    req.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')));
     req.on('error', reject);
   });
 }
