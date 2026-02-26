@@ -30,6 +30,12 @@ module.exports = async (req, res) => {
   }
 
   try {
+    console.log('Creating Stripe session with:', {
+      priceId,
+      mode: 'payment',
+      success_url: `${process.env.NEXT_PUBLIC_URL}/thank-you.html`,
+    });
+
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: [{ price: priceId, quantity: 1 }],
@@ -39,9 +45,12 @@ module.exports = async (req, res) => {
       metadata: { product },
     });
 
+    console.log('Stripe session created:', session.id);
     res.status(200).json({ url: session.url });
   } catch (err) {
     console.error('Stripe error:', err.message);
+    console.error('Stripe error type:', err.type);
+    console.error('Stripe error full:', JSON.stringify(err, null, 2));
     res.status(500).json({ error: err.message });
   }
 };
