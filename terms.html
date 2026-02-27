@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of Service — The Agentic Blueprint</title>
+  <meta name="description" content="Terms of Service for The Agentic Blueprint. Digital product purchase terms, intellectual property, and governing law." />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://www.theagenticblueprint.com/terms.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.theagenticblueprint.com/terms.html" />
+  <meta property="og:title" content="Terms of Service — The Agentic Blueprint" />
+  <meta property="og:description" content="Terms of Service for The Agentic Blueprint digital guides." />
+  <meta property="og:site_name" content="The Agentic Blueprint" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0a0a0a;
+      --bg2:      #111111;
+      --bg3:      #1a1a1a;
+      --border:   #252525;
+      --accent:   #7c3aed;
+      --accent2:  #a855f7;
+      --green:    #22c55e;
+      --text:     #f0f0f0;
+      --muted:    #888;
+      --radius:   12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* NAV */
+    nav {
+      border-bottom: 1px solid var(--border);
+      padding: 18px 0;
+      position: sticky;
+      top: 0;
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+
+    nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: -0.3px;
+    }
+
+    .nav-logo span { color: var(--accent2); }
+
+    .nav-back {
+      color: var(--muted);
+      font-size: 13px;
+      transition: color 0.2s;
+    }
+
+    .nav-back:hover { color: var(--text); }
+
+    /* CONTENT */
+    .legal-page {
+      padding: 64px 0 80px;
+    }
+
+    .legal-header {
+      margin-bottom: 48px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tag {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--accent2);
+      background: rgba(124,58,237,0.1);
+      border: 1px solid rgba(124,58,237,0.2);
+      border-radius: 6px;
+      padding: 3px 8px;
+      margin-bottom: 16px;
+    }
+
+    .legal-header h1 {
+      font-size: 40px;
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      margin-bottom: 12px;
+    }
+
+    .legal-header p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .legal-content {
+      display: grid;
+      gap: 40px;
+    }
+
+    .legal-section h2 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .legal-section h2::before {
+      content: '';
+      display: inline-block;
+      width: 3px;
+      height: 18px;
+      background: var(--accent2);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    .legal-section p {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.75;
+      margin-bottom: 12px;
+    }
+
+    .legal-section p:last-child { margin-bottom: 0; }
+
+    .legal-section ul {
+      list-style: none;
+      display: grid;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .legal-section ul li {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.6;
+      display: flex;
+      gap: 10px;
+    }
+
+    .legal-section ul li::before {
+      content: '·';
+      color: var(--accent2);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .legal-section strong { color: var(--text); }
+
+    .legal-section a {
+      color: var(--accent2);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .legal-section a:hover { color: var(--text); }
+
+    .highlight-box {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent2);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      margin-top: 16px;
+    }
+
+    .highlight-box p {
+      margin: 0;
+      font-size: 14px;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 0;
+      text-align: center;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    footer a { color: var(--muted); transition: color 0.2s; }
+    footer a:hover { color: var(--text); }
+
+    @media (max-width: 640px) {
+      .legal-header h1 { font-size: 28px; }
+      .legal-page { padding: 40px 0 60px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="container">
+    <a href="/" class="nav-logo">The <span>Agentic</span> Blueprint</a>
+    <a href="/" class="nav-back">← Back to home</a>
+  </div>
+</nav>
+
+<!-- CONTENT -->
+<div class="legal-page">
+  <div class="container">
+
+    <div class="legal-header">
+      <div class="tag">// legal</div>
+      <h1>Terms of Service</h1>
+      <p>Last updated: February 27, 2026 &nbsp;·&nbsp; Effective immediately</p>
+    </div>
+
+    <div class="legal-content">
+
+      <div class="legal-section">
+        <h2>1. Acceptance of Terms</h2>
+        <p>By accessing or purchasing any product from The Agentic Blueprint (<strong>https://www.theagenticblueprint.com</strong>), you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not make a purchase or use this website.</p>
+        <p>These terms apply to all visitors, users, and customers of the website, operated by Valentin Henry-Léo ("we", "us", or "our").</p>
+      </div>
+
+      <div class="legal-section">
+        <h2>2. Digital Products & Purchases</h2>
+        <p>The Agentic Blueprint sells digital products — specifically PDF guides delivered electronically. By completing a purchase, you acknowledge and agree to the following:</p>
+        <ul>
+          <li><strong>Instant delivery:</strong> Products are delivered digitally via email immediately after payment confirmation.</li>
+          <li><strong>Non-refundable after download:</strong> Due to the nature of digital products, all sales are final once the product has been downloaded or delivered. We do not offer refunds after a PDF has been accessed.</li>
+          <li><strong>30-day guarantee (pre-download):</strong> If you have not yet downloaded your product and are unsatisfied, you may request a full refund within 30 days of purchase by emailing <a href="mailto:valentin@theagenticblueprint.com">valentin@theagenticblueprint.com</a>.</li>
+          <li><strong>One-time payment:</strong> All prices are one-time charges. There are no recurring subscriptions or hidden fees.</li>
+          <li><strong>Personal use only:</strong> Licenses are granted for personal, non-commercial use by the purchasing individual only.</li>
+        </ul>
+      </div>
+
+      <div class="legal-section">
+        <h2>3. Intellectual Property</h2>
+        <p>All content published on this website and within our PDF guides — including but not limited to text, designs, workflows, frameworks, and code snippets — is the exclusive intellectual property of The Agentic Blueprint and its author.</p>
+        <ul>
+          <li>You may not reproduce, redistribute, resell, or republish any part of our guides without explicit written permission.</li>
+          <li>You may not share, upload, or distribute the PDF files to third parties.</li>
+          <li>You may not use our content to create derivative products for commercial sale.</li>
+          <li>Personal use, note-taking, and implementing the workflows for your own projects is explicitly permitted and encouraged.</li>
+        </ul>
+        <p>Violations of intellectual property rights will be pursued to the fullest extent permitted by applicable law.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2>4. Disclaimer of Warranties</h2>
+        <p>Our guides are provided for informational and educational purposes. While we strive to ensure accuracy and quality, we make no guarantees or warranties regarding:</p>
+        <ul>
+          <li>Specific results or outcomes from implementing the described workflows.</li>
+          <li>Compatibility with third-party tools, APIs, or services (including Anthropic, Hetzner, or Telegram).</li>
+          <li>The accuracy or completeness of information at any future date, as the AI landscape evolves rapidly.</li>
+        </ul>
+        <p>Use of the techniques and systems described in our guides is at your own risk and discretion.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2>5. Limitation of Liability</h2>
+        <p>To the maximum extent permitted by applicable law, The Agentic Blueprint and its author shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from:</p>
+        <ul>
+          <li>Your use or inability to use our products.</li>
+          <li>Any errors or omissions in the content.</li>
+          <li>Costs incurred from third-party services (server hosting, API usage, etc.) recommended in our guides.</li>
+          <li>Any decisions made based on the content of our guides.</li>
+        </ul>
+        <div class="highlight-box">
+          <p>Our total liability to you for any claim arising from the purchase of our products shall not exceed the amount you paid for the product in question.</p>
+        </div>
+      </div>
+
+      <div class="legal-section">
+        <h2>6. Payment Processing</h2>
+        <p>All payments are processed securely through <strong>Stripe</strong>, a PCI-DSS compliant payment processor. We do not store your credit card information. By making a purchase, you also agree to Stripe's <a href="https://stripe.com/legal/ssa" target="_blank" rel="noopener">Terms of Service</a>.</p>
+        <p>Prices are displayed in USD. If you purchase from the EU, VAT may be applied at checkout depending on your jurisdiction.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2>7. Governing Law & Jurisdiction</h2>
+        <p>These Terms of Service are governed by and construed in accordance with the laws of <strong>France</strong> and applicable European Union regulations.</p>
+        <p>Any disputes arising from these terms or your use of our products shall be subject to the exclusive jurisdiction of the courts of Paris, France. If you are a consumer resident in the EU, you retain any mandatory consumer protection rights granted by the laws of your country of residence.</p>
+        <p>EU consumers also have the right to use the European Commission's online dispute resolution platform: <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">https://ec.europa.eu/consumers/odr</a>.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2>8. Changes to Terms</h2>
+        <p>We reserve the right to modify these Terms of Service at any time. Changes will be effective immediately upon posting to this page with an updated "Last updated" date. Your continued use of our website or products after changes constitutes acceptance of the new terms.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2>9. Contact</h2>
+        <p>For any questions about these Terms of Service, please contact us at:</p>
+        <div class="highlight-box">
+          <p><strong>The Agentic Blueprint</strong><br>
+          Email: <a href="mailto:valentin@theagenticblueprint.com">valentin@theagenticblueprint.com</a><br>
+          Website: <a href="https://www.theagenticblueprint.com">https://www.theagenticblueprint.com</a></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <p>© 2025 The Agentic Blueprint · <a href="mailto:hello@theagenticblueprint.com">hello@theagenticblueprint.com</a></p>
+    <p style="margin-top:10px;"><a href="/terms.html">Terms of Service</a> &nbsp;·&nbsp; <a href="/privacy.html">Privacy Policy</a> &nbsp;·&nbsp; <a href="/">Home</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
