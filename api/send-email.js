@@ -90,7 +90,7 @@ module.exports = async (req, res) => {
     console.log('Sending email to:', customerEmail, 'product:', resolvedProduct);
 
     const result = await resend.emails.send({
-      from: 'The Agentic Blueprint <hello@theagenticblueprint.com>',
+      from: 'The Agentic Blueprint <valentin@theagenticblueprint.com>',
       to: [customerEmail],
       subject: `Your copy of ${product.name} 🐷`,
       html: buildEmailHtml(product, resolvedProduct),
