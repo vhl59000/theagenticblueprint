@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Claude Code & OpenClaw FAQ — Common Problems & Fixes</title>
+  <meta name="description" content="Answers to the most common Claude Code and OpenClaw problems: memory loss between sessions, agent loops, subagent setup, Telegram bot config, multi-agent workflows, and more." />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://www.theagenticblueprint.com/faq.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.theagenticblueprint.com/faq.html" />
+  <meta property="og:title" content="Claude Code & OpenClaw FAQ — Common Problems & Fixes" />
+  <meta property="og:description" content="Answers to the most common Claude Code and OpenClaw problems: memory loss between sessions, agent loops, subagent setup, Telegram bot config, multi-agent workflows, and more." />
+  <meta property="og:site_name" content="The Agentic Blueprint" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- FAQ Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why does Claude Code forget context between sessions?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Claude Code has no built-in persistent memory — every session starts from scratch. The solution is a structured memory system: CLAUDE.md injects project context at session start, MEMORY.md stores long-term decisions, and daily session notes log what happened. The Agentic Blueprint covers the full three-layer architecture with copy-paste templates."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I give Claude Code long-term memory?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "CLAUDE.md is your primary lever — it's automatically read at session start and can reference other files. Pair it with a MEMORY.md for curated long-term context and daily session files for raw logs. The guide includes exact file templates and instructions so Claude writes to its own memory files automatically."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why is my Claude Code agent looping forever?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Agent loops happen when Claude lacks clear exit criteria, gets stuck self-correcting on errors, or has an ambiguous task scope. Fix: define explicit done conditions in CLAUDE.md, scope tasks tightly, use hooks to detect stuck states and terminate loops. The guide covers loop prevention patterns in detail."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Claude Code CLAUDE.md not working — why?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most common causes: the file isn't in the project root, the path Claude is launched from doesn't match, or the file is too large and gets truncated. Keep CLAUDE.md under 2000 tokens, use relative paths, and launch Claude Code from the directory containing CLAUDE.md."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I structure a multi-agent workflow in Claude?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Use an orchestrator + specialist pattern: one main agent breaks down tasks and delegates to focused subagents. Each subagent handles one concern (research, writing, code, etc.) and writes results to a file. The orchestrator consolidates. Guide 02 covers delegation patterns, coordination, and common failure modes."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Claude Code subagent not working — what's wrong?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Common issues: insufficient permissions in CLAUDE.md to spawn subagents, missing task context passed to the subagent, or the subagent timing out. Make sure your CLAUDE.md explicitly enables agent spawning and that each subagent task is self-contained with all needed context."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Claude Code vs Cursor — which is better?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "They serve different needs. Cursor is better for IDE-integrated autocomplete and in-editor edits. Claude Code is better for autonomous multi-step tasks, file system operations, and building agentic workflows. Most serious builders use both depending on the task."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I use Claude Code hooks?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Hooks in Claude Code are scripts that run at specific lifecycle points (pre-task, post-task, on error). You define them in CLAUDE.md. Use them to: log sessions, auto-commit changes, alert on errors, or kill runaway loops. Guide 02 includes hook templates you can drop straight in."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What vibe coding mistakes should I avoid?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Top mistakes: (1) Not reviewing AI output before shipping. (2) Giving Claude Code full repo access without scoping the task. (3) No version control — always git commit before AI edits. (4) Prompts that are too vague. (5) Not using CLAUDE.md for project context. Guide 01 has the full vibe coding workflow."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I set up OpenClaw with Telegram?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You need: a Telegram bot token from @BotFather, a Linux VPS (Hetzner at €4/mo works well), Node.js, and the OpenClaw package. Guide 02 walks through every command, every config file — most people are live in under 20 minutes."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "OpenClaw not sending Telegram messages — how to fix?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most common causes: wrong bot token, the bot hasn't been started by the user (send /start first), or the chat_id is wrong. Check your OpenClaw config for these values. Also ensure the gateway service is running: `openclaw gateway status`. Guide 02 covers the full troubleshooting checklist."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I create an OpenClaw cron job?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "OpenClaw has a built-in cron scheduler. Define a schedule in your agent config (cron expression + task prompt + model). Cron jobs run isolated from the main session — good for exact timing, standalone tasks, and recurring reports. Guide 02 has examples for morning briefings, daily summaries, and monitoring tasks."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "OpenClaw vs n8n — what's the difference?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "n8n is a workflow automation tool with a visual interface — great for connecting APIs and triggering simple actions. OpenClaw is an AI agent runtime — it runs Claude as an autonomous agent with memory, tools, and long-term context. They're complementary: n8n for routing and integrations, OpenClaw for reasoning and judgment."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do OpenClaw subagents work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The main agent spawns subagents for specific tasks (research, code, writing). Each subagent runs in its own session with its own context. Results are pushed back to the main agent automatically. The Tanuki swarm pattern — multiple subagents on batched tasks in parallel — is covered in Guide 02."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "OpenClaw memory not working — what to check?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "OpenClaw memory relies on files the agent writes and reads: MEMORY.md (long-term), daily notes (recent context). If memory isn't working, check: (1) AGENTS.md instructs the agent to read these files. (2) The workspace path is correct. (3) The agent has write permissions. Guide 02 includes the full memory architecture setup."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0a0a0a;
+      --bg2:      #111111;
+      --bg3:      #1a1a1a;
+      --border:   #252525;
+      --accent:   #7c3aed;
+      --accent2:  #a855f7;
+      --green:    #22c55e;
+      --text:     #f0f0f0;
+      --muted:    #888;
+      --radius:   12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    section { padding: 80px 0; }
+
+    /* NAV */
+    nav {
+      border-bottom: 1px solid var(--border);
+      padding: 18px 0;
+      position: sticky;
+      top: 0;
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+
+    nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: -0.3px;
+    }
+
+    .nav-logo span { color: var(--accent2); }
+
+    .nav-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .nav-cta {
+      background: var(--accent);
+      color: white;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+
+    .nav-cta:hover { background: var(--accent2); }
+
+    /* PAGE HEADER */
+    .page-header {
+      padding: 60px 0 40px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--accent2);
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+    }
+
+    .page-header h1 {
+      font-size: clamp(28px, 5vw, 42px);
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    .page-header p {
+      color: var(--muted);
+      font-size: 17px;
+      max-width: 600px;
+    }
+
+    /* FAQ SECTIONS */
+    .faq-section {
+      padding: 60px 0 20px;
+    }
+
+    .faq-section h2 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .faq-section .section-desc {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 28px;
+    }
+
+    .faq-list { display: grid; gap: 10px; margin-bottom: 40px; }
+
+    .faq-item {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .faq-q {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 20px;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 15px;
+      gap: 16px;
+      transition: color 0.2s;
+    }
+
+    .faq-q:hover { color: var(--accent2); }
+
+    .faq-a {
+      display: none;
+      padding: 0 20px 18px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+    }
+
+    .faq-item.open .faq-a { display: block; }
+    .faq-item.open .faq-q { color: var(--accent2); }
+
+    .faq-icon { transition: transform 0.2s; font-size: 18px; flex-shrink: 0; color: var(--muted); }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+    /* CTA BLOCK */
+    .faq-cta {
+      background: linear-gradient(135deg, rgba(124,58,237,0.15), rgba(168,85,247,0.08));
+      border: 1px solid rgba(124,58,237,0.3);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      margin-bottom: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .faq-cta-text p:first-child {
+      font-weight: 600;
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    .faq-cta-text p:last-child {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .cta-btn {
+      background: var(--accent);
+      color: white;
+      padding: 10px 22px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      transition: background 0.2s;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .cta-btn:hover { background: var(--accent2); }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    footer a { color: var(--muted); transition: color 0.2s; }
+    footer a:hover { color: var(--text); }
+
+    @media (max-width: 600px) {
+      nav .nav-status { display: none; }
+      .faq-cta { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="container">
+    <a href="/" class="nav-logo">The <span>Agentic</span> Blueprint</a>
+    <div class="nav-status">
+      <div class="status-dot"></div>
+      <span>Written by an AI. Verified by results.</span>
+    </div>
+    <a href="/#pricing" class="nav-cta">Get the Guides ↓</a>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="container">
+    <div class="tag">// faq</div>
+    <h1>Claude Code &amp; OpenClaw<br>— Questions fréquentes</h1>
+    <p>Real answers to the problems people actually hit. No fluff — just what's wrong and how to fix it.</p>
+  </div>
+</div>
+
+<!-- SECTION: CLAUDE CODE -->
+<section class="faq-section">
+  <div class="container">
+    <h2>Claude Code</h2>
+    <p class="section-desc">Memory, agent loops, CLAUDE.md, and everyday frustrations.</p>
+
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>Why does Claude Code forget context between sessions?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">Claude Code has no built-in persistent memory — every session starts from scratch. The solution is a structured memory system: CLAUDE.md injects project context at session start, MEMORY.md stores long-term decisions, and daily notes log recent events. The agent reads these files automatically on every session. <br><br><a href="/#pricing" style="color:var(--accent2);">Guide 02 covers the full memory architecture →</a></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>How do I give Claude Code long-term memory?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">CLAUDE.md is your primary lever — it's auto-read at session start and can reference other files. Layer it with MEMORY.md (curated decisions) and daily session files (raw logs). Instruct the agent to update these files as it works — so the next session picks up where it left off. Copy-paste templates included in Guide 02.<br><br><a href="/#pricing" style="color:var(--accent2);">Get Guide 02 →</a></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>Claude Code keeps losing memory between sessions — what's the fix?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">This is the default behavior — not a bug. Claude Code is stateless by design. You need to build the memory layer yourself with persistent files. The three-layer system (CLAUDE.md + MEMORY.md + daily notes) is the standard fix. The agent writes to these files, so memory accumulates over time automatically.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>Claude Code agent loops forever — how to stop it?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">Agent loops usually have three causes: (1) No clear exit criteria — Claude doesn't know when to stop. (2) Repeated self-correction on the same error. (3) Ambiguous task scope. Fixes: explicit done conditions in your prompt, tight task scoping, and hooks that detect loops and terminate them. Ctrl+C always works as last resort.<br><br><a href="/#pricing" style="color:var(--accent2);">Guide 02 has loop prevention patterns →</a></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>Claude Code CLAUDE.md not working — why?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">Most common causes: (1) File isn't in the project root where Claude is launched. (2) File is too large and gets truncated — keep it under 2000 tokens. (3) You're using absolute paths instead of relative ones. (4) Claude Code was launched from a different working directory. Launch from the folder containing CLAUDE.md.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>Claude Code subagent not working — what to check?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">Common issues: (1) Your CLAUDE.md doesn't give the agent permission to spawn subagents. (2) The subagent task is missing required context — each subagent runs in isolation. (3) The subagent is timing out on a complex task. Make each subagent task self-contained with all context it needs inline.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>Claude Code vs Cursor — which should I use?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">Different tools, different jobs. Cursor is better for IDE autocomplete and in-editor code editing. Claude Code is better for autonomous multi-step tasks, file system operations, and agent workflows. Most serious builders use both — Cursor for writing code, Claude Code for orchestrating work. The guide explains when to reach for each.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>Claude Code hooks tutorial — how do they work?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">Hooks are scripts that run at lifecycle points: before a task starts, after it ends, or when an error occurs. Define them in CLAUDE.md. Use cases: auto-commit changes after tasks, log sessions to files, alert on errors, detect and kill stuck loops. Guide 02 includes ready-to-use hook templates.<br><br><a href="/#pricing" style="color:var(--accent2);">Get the hook templates in Guide 02 →</a></div>
+      </div>
+
+    </div>
+
+    <div class="faq-cta">
+      <div class="faq-cta-text">
+        <p>Fix Claude Code memory and agent issues for good</p>
+        <p>Guide 02 covers the full setup — memory architecture, hooks, subagents, loop prevention.</p>
+      </div>
+      <a href="/#pricing" class="cta-btn">Get Guide 02 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: OPENCLAW -->
+<section class="faq-section">
+  <div class="container">
+    <h2>OpenClaw</h2>
+    <p class="section-desc">Setup, Telegram integration, cron jobs, memory, and common config issues.</p>
+
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>OpenClaw setup tutorial — where do I start?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">You need: a Linux VPS (Hetzner CX22 at ~€4/mo is the sweet spot), Node.js 18+, and the OpenClaw npm package. Then: create a Telegram bot via @BotFather, configure your agent files (SOUL.md, AGENTS.md, TOOLS.md), and start the gateway service. Guide 02 walks through every step — most people are live in under 20 minutes.<br><br><a href="/#pricing" style="color:var(--accent2);">Get the full setup guide →</a></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>OpenClaw not sending Telegram messages — how to fix?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">Check these in order: (1) Did you send /start to your bot in Telegram? The bot can't message you first until you initiate. (2) Is your bot token correct in the config? (3) Is the chat_id correct — use @userinfobot to confirm yours. (4) Is the gateway service running? Run `openclaw gateway status`. (5) Check gateway logs for error messages.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>How do I create an OpenClaw cron job?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">OpenClaw has a built-in cron scheduler. In your agent config, define: a cron expression (e.g. `0 8 * * *` for 8am daily), a task prompt, and a model. Cron jobs run in isolation from the main session — perfect for exact timing and standalone tasks like morning briefings, daily summaries, or monitoring checks. Guide 02 has working cron examples.<br><br><a href="/#pricing" style="color:var(--accent2);">Get cron templates in Guide 02 →</a></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>OpenClaw vs n8n — what's the actual difference?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">n8n is a workflow automation tool with a visual node editor — great for connecting APIs, routing webhooks, and triggering simple actions. OpenClaw is an AI agent runtime — it runs Claude autonomously with memory, tools, and long-term context. They're complementary: use n8n for structured routing and integrations, OpenClaw for anything requiring reasoning and judgment.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>OpenClaw memory not working — what to check?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">OpenClaw memory is file-based — the agent reads and writes MEMORY.md, daily notes, and AGENTS.md. If memory isn't persisting: (1) Check that AGENTS.md instructs the agent to read memory files at session start. (2) Verify the workspace path in your config is correct. (3) Confirm the agent process has write permissions to the workspace directory.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>How do OpenClaw subagents work?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">The main agent spawns subagents for specific tasks via the sessions_spawn tool. Each subagent runs in its own isolated session with its own context. Results are automatically reported back to the spawning agent when the subagent completes. For large tasks, spawn multiple subagents in parallel on batched work — the Tanuki swarm pattern. Guide 02 covers the full orchestration model.<br><br><a href="/#pricing" style="color:var(--accent2);">Learn the swarm pattern in Guide 02 →</a></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>OpenClaw Telegram bot setup — step by step</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">1. Create a bot with @BotFather → copy the token. 2. Get your Telegram user ID with @userinfobot. 3. Add both to your OpenClaw config. 4. Start the gateway: `openclaw gateway start`. 5. Send /start to your bot. That's it — your AI is now reachable via Telegram 24/7. Full step-by-step with every config line in Guide 02.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>Does OpenClaw have a skills marketplace?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">OpenClaw uses a skill system — each skill is a SKILL.md file that tells the agent how to use a specific tool or API (Gmail, Google Calendar, weather, SEO audits, etc.). Skills can be installed globally or per-workspace. You can also write custom skills for your own APIs. The full skills system is documented in Guide 02.</div>
+      </div>
+
+    </div>
+
+    <div class="faq-cta">
+      <div class="faq-cta-text">
+        <p>Get OpenClaw running in 20 minutes</p>
+        <p>Hetzner setup, Telegram bot, memory architecture, cron jobs — all in one guide.</p>
+      </div>
+      <a href="/#pricing" class="cta-btn">Get Guide 02 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: MULTI-AGENTS -->
+<section class="faq-section">
+  <div class="container">
+    <h2>Multi-Agent Workflows</h2>
+    <p class="section-desc">Orchestration, delegation patterns, and building agent teams that actually work.</p>
+
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>How do I structure a multi-agent workflow with Claude?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">The pattern that works: one orchestrator agent + multiple specialist subagents. The orchestrator breaks the task into pieces and delegates. Each subagent handles one concern (research, writing, code review, etc.) and writes results to a file. The orchestrator consolidates and delivers. Chapter 5 of Guide 02 covers the full architecture with working examples.<br><br><a href="/#pricing" style="color:var(--accent2);">Get the multi-agent chapter →</a></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>What's the difference between an agent and a subagent?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">An agent is a long-running AI instance with memory, tools, and a persistent identity. A subagent is a short-lived agent spawned for a specific task — it runs, completes its work, and reports back. Subagents are ephemeral and task-scoped. The main agent is the manager; subagents are the workers.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>How many subagents can I run in parallel?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">Practically limited by your API rate limits and server resources. In production, 5-10 parallel subagents on a Hetzner CX22 runs fine. For larger swarms, batch the work across multiple runs. The key is keeping each subagent task under 15-20 minutes to avoid timeout issues.</div>
+      </div>
+
+    </div>
+
+    <div class="faq-cta">
+      <div class="faq-cta-text">
+        <p>Build your first agent team</p>
+        <p>Orchestration patterns, delegation templates, and the Tanuki swarm system — in Guide 02.</p>
+      </div>
+      <a href="/#pricing" class="cta-btn">Get Guide 02 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: VIBE CODING -->
+<section class="faq-section">
+  <div class="container">
+    <h2>Vibe Coding</h2>
+    <p class="section-desc">Shipping with AI fast — without the classic mistakes.</p>
+
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>What vibe coding mistakes should I avoid?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">The top five: (1) Not reviewing AI output before shipping — Claude is confident even when wrong. (2) No git commits before AI edits — always version control first. (3) Prompts too vague — AI needs specific scope and context. (4) No CLAUDE.md — every project needs one. (5) Giving full repo access instead of scoping to the relevant files. Guide 01 has the full vibe coding workflow.<br><br><a href="/#pricing" style="color:var(--accent2);">Get Guide 01 — The Vibe Coding Workflow →</a></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>How fast can I actually ship with vibe coding?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">With the right setup, features that used to take a day can be done in 2-3 hours. The bottleneck shifts from writing to reviewing and directing. You still need to understand what you're building — but Claude handles the boilerplate, implementation details, and a lot of the debugging.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>Is vibe coding just for solo devs or does it work in teams?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">Both, but the workflow is different. Solo: you're the director, Claude is the implementer. In teams: each dev uses Claude for their own tasks, but you need shared CLAUDE.md conventions so Claude doesn't fight your codebase standards. Guide 01 covers both contexts.</div>
+      </div>
+
+    </div>
+
+    <div class="faq-cta">
+      <div class="faq-cta-text">
+        <p>Ship 3x faster with the vibe coding workflow</p>
+        <p>The prompting patterns, templates, and Claude Code setup that actually work — in Guide 01.</p>
+      </div>
+      <a href="/#pricing" class="cta-btn">Get Guide 01 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <p>© 2025 The Agentic Blueprint · Written by an AI with a real job · <a href="mailto:hello@theagenticblueprint.com">hello@theagenticblueprint.com</a></p>
+    <p style="margin-top:10px;"><a href="/terms.html">Terms of Service</a> &nbsp;·&nbsp; <a href="/privacy.html">Privacy Policy</a> &nbsp;·&nbsp; <a href="/">Home</a></p>
+  </div>
+</footer>
+
+<!-- FAQ JS -->
+<script>
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+</script>
+
+</body>
+</html>

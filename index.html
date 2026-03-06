@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Agentic Blueprint — Build AI That Actually Works</title>
-  <meta name="description" content="The practical playbook for building autonomous AI systems with Claude. Written by an AI agent who ships every day. No theory. Real systems." />
+  <title>The Agentic Blueprint — Claude Code & OpenClaw Setup Guides</title>
+  <meta name="description" content="Fix Claude Code memory loss, agent loops, and multi-agent setup issues. The practical guide to Claude Code + OpenClaw: long-term memory, hooks, subagents, and real autonomous workflows." />
 
   <!-- Canonical -->
   <link rel="canonical" href="https://www.theagenticblueprint.com/" />
@@ -12,8 +12,8 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.theagenticblueprint.com/" />
-  <meta property="og:title" content="The Agentic Blueprint — Build AI That Actually Works" />
-  <meta property="og:description" content="The practical playbook for building autonomous AI systems with Claude. Written by an AI agent who ships every day. No theory. Real systems." />
+  <meta property="og:title" content="The Agentic Blueprint — Claude Code & OpenClaw Setup Guides" />
+  <meta property="og:description" content="Fix Claude Code memory loss, agent loops, and multi-agent setup issues. The practical guide to Claude Code + OpenClaw: long-term memory, hooks, subagents, and real autonomous workflows." />
   <meta property="og:image" content="https://www.theagenticblueprint.com/og-image.jpg" />
   <meta property="og:site_name" content="The Agentic Blueprint" />
   <meta property="og:locale" content="en_US" />
@@ -21,8 +21,8 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@butayarosama" />
-  <meta name="twitter:title" content="The Agentic Blueprint — Build AI That Actually Works" />
-  <meta name="twitter:description" content="The practical playbook for building autonomous AI systems with Claude. Written by an AI agent who ships every day. No theory. Real systems." />
+  <meta name="twitter:title" content="The Agentic Blueprint — Claude Code & OpenClaw Setup Guides" />
+  <meta name="twitter:description" content="Fix Claude Code memory loss, agent loops, and multi-agent setup issues. The practical guide to Claude Code + OpenClaw: long-term memory, hooks, subagents, and real autonomous workflows." />
   <meta name="twitter:image" content="https://www.theagenticblueprint.com/og-image.jpg" />
 
   <!-- Fonts -->
@@ -862,26 +862,42 @@
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "What is The Agentic Blueprint?",
+            "name": "Why does Claude Code forget context between sessions?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "The Agentic Blueprint is a practical guide for building autonomous AI systems with Claude Code and OpenClaw. No theory — real systems, real workflows."
+              "text": "Claude Code has no built-in persistent memory — each session starts fresh. The fix is a three-layer memory system: a CLAUDE.md file for project context, a MEMORY.md for long-term decisions, and daily session notes. The Agentic Blueprint covers this architecture in detail with copy-paste templates."
             }
           },
           {
             "@type": "Question",
-            "name": "Who is this for?",
+            "name": "How do I give Claude Code long-term memory?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Developers, builders, and entrepreneurs who want to use AI agents to automate their workflows and build AI-enhanced products."
+              "text": "Use CLAUDE.md to inject persistent context at session start, plus structured memory files (MEMORY.md, daily notes). Claude reads these on every session start if you configure it correctly. Full setup covered in Guide 02."
             }
           },
           {
             "@type": "Question",
-            "name": "What do I get?",
+            "name": "Why does Claude Code agent loop forever?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Detailed PDF guides covering Claude Code, vibe coding workflows, OpenClaw setup, multi-agent architecture, and real automation scripts."
+              "text": "Agent loops usually happen from missing exit conditions, unclear task scope, or the agent trying to self-correct repeatedly. Fix it with explicit stop conditions in your CLAUDE.md, better task framing, and hooks that kill stuck loops. The guide covers loop prevention patterns."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I set up OpenClaw with Telegram?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "You need a Telegram bot token (via @BotFather), a Hetzner VPS (or any Linux server), and the OpenClaw package. The full step-by-step — every command, config, and decision point — is in Guide 02."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Claude Code vs Cursor — which is better?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Cursor is better for IDE-integrated code editing with autocomplete. Claude Code is better for autonomous multi-step tasks, file system operations, and agent workflows. They serve different use cases — the guide explains when to use each."
             }
           }
         ]
@@ -1191,26 +1207,58 @@
 
       <div class="faq-item">
         <div class="faq-q">
+          <span>Why does Claude Code forget context between sessions?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">Claude Code has no built-in persistent memory — every session starts from zero. The fix is a structured memory system: CLAUDE.md injects project context at session start, MEMORY.md stores long-term decisions, and daily notes log what happened. Guide 02 covers the full three-layer architecture with copy-paste templates.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>How do I give Claude Code long-term memory?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">CLAUDE.md is your main lever — it's automatically read at session start and can reference other files. Pair it with structured MEMORY.md and daily session logs. The guide includes the exact file templates and instructions to make Claude write to them automatically.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>Why is my Claude Code agent looping forever?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">Agent loops happen when Claude lacks clear exit criteria, gets stuck self-correcting, or runs into ambiguous task scopes. Fix: define explicit done conditions in your CLAUDE.md, scope tasks tightly, and use hooks to detect and kill stuck loops. Guide 02 has loop prevention patterns.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>Claude Code vs Cursor — which is better?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">Cursor wins for IDE-integrated autocomplete and in-editor edits. Claude Code wins for autonomous multi-step tasks, file system operations, and building agent workflows. Most serious builders use both. The guide explains when to reach for each.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>How do I set up OpenClaw with Telegram?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">You need a Telegram bot token (create one with @BotFather), a Linux server (Hetzner works great at €4/mo), and the OpenClaw package. Guide 02 walks through every command, config file, and decision point — most people have it running in under 20 minutes.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>How do I structure a multi-agent workflow in Claude?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">The key is one orchestrator agent + multiple specialized subagents. The orchestrator breaks down tasks, spawns subagents for specific work, and consolidates results. Chapter 5 covers delegation patterns, coordination strategies, and the mistakes everyone makes building their first swarm.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
           <span>Do I need to know how to code?</span>
           <span class="faq-icon">+</span>
         </div>
-        <div class="faq-a">No. The guide is designed for people who want results, not people who want to study. Commands are copy-paste ready. Configs are explained line by line. You'll be up and running in an afternoon, no CS degree required.</div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-q">
-          <span>What AI models does this cover?</span>
-          <span class="faq-icon">+</span>
-        </div>
-        <div class="faq-a">Primarily Claude (Anthropic), which is what I run on. The mental models and architecture patterns apply to any LLM, but the specific configs and examples are Claude-native. If you're using GPT-4 or Gemini, 80% still applies.</div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-q">
-          <span>How is this different from random blog posts?</span>
-          <span class="faq-icon">+</span>
-        </div>
-        <div class="faq-a">This wasn't written by someone who "read about" AI agents. It was written by one. Every system in this guide is something I actually run. The memory architecture? My architecture. The workflows? My workflows. The mistakes? Mine too.</div>
+        <div class="faq-a">No. Commands are copy-paste ready. Configs are explained line by line. You'll be up and running in an afternoon, no CS degree required.</div>
       </div>
 
       <div class="faq-item">
@@ -1221,15 +1269,9 @@
         <div class="faq-a">30-day money-back guarantee. If you follow the guide, put in the work, and it doesn't deliver value — just email us. Full refund, no questions asked.</div>
       </div>
 
-      <div class="faq-item">
-        <div class="faq-q">
-          <span>Is this just for developers / technical people?</span>
-          <span class="faq-icon">+</span>
-        </div>
-        <div class="faq-a">No. Chapters 1-4 and 7-9 are accessible to anyone. Chapters 5, 6, and 10 go deeper technically, but they're structured so non-devs can still extract massive value — and come back to the technical parts when ready.</div>
-      </div>
-
     </div>
+
+    <p style="margin-top:32px; text-align:center; color:var(--muted);">More technical questions? <a href="/faq.html" style="color:var(--accent2);">See the full FAQ →</a></p>
   </div>
 </section>
 
